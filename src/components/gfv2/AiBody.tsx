@@ -18,6 +18,7 @@ import { testParamsForAlice, aliceConfigTestData } from "@/lib/const/testData";
 import TestComponent from "@/lib/const/TestComponent";
 import Pepe from "@/lib/const/Pepe";
 import MainHero from "../MainHero";
+import GfConfigForm from "../GfConfigForm";
 
 const AiBody: React.FC = () => {
   const [systemSettings, setSystemSettings] = useState<Message | null>(null);
@@ -129,63 +130,70 @@ const AiBody: React.FC = () => {
   };
 
   return (
-    <Card className="max-h-fit max-w-[90vw]">
-      {/* <Pepe /> */}
-      {gfImg && (
-        <Card className="border-none p-4 flex items-center justify-center w-full">
-          <Image
-            priority={true}
-            src={gfImg}
-            alt="gf-img"
-            height={512}
-            width={512}
-          />
+    <>
+      {systemSettings && (
+        <Card className="max-h-fit max-w-[90vw]">
+          {/* <Pepe /> */}
+          {gfImg && (
+            <Card className="border-none p-4 flex items-center justify-center w-full">
+              <Image
+                priority={true}
+                src={gfImg}
+                alt="gf-img"
+                height={512}
+                width={512}
+              />
+            </Card>
+          )}
+          <Card className="border-none flex flex-col p-4 mt-4 w-[90vw] mb-8 items-center max-h-[45vh] overflow-scroll overflow-x-hidden">
+            {gfImg ? (
+              <>
+                <CardContent className="flex flex-col gap-4">
+                  {messages.map((message, index) => (
+                    <Card key={index} className="p-4">
+                      <strong>{message.role}:</strong> {message.content}
+                    </Card>
+                  ))}
+                </CardContent>
+              </>
+            ) : null}
+
+            {/* <TestComponent gfImg={""} messages={[]} /> */}
+
+            {loading && <p>Loading...</p>}
+            {error && <p>{error}</p>}
+          </Card>
+          <Card className="border-none items-center flex flex-row justify-center pb-4">
+            {systemSettings && !loading && (
+              <CardFooter className="flex flex-row gap-4 mt-4 max-w-[80vw]">
+                <Input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  disabled={loading}
+                />
+
+                <Button onClick={handleSendMessage} disabled={loading}>
+                  Send
+                </Button>
+              </CardFooter>
+            )}
+          </Card>
         </Card>
       )}
-      <Card className="border-none flex flex-col p-4 mt-4 w-[90vw] mb-8 items-center max-h-[45vh] overflow-scroll overflow-x-hidden">
-        {gfImg ? (
-          <>
-            <CardContent className="flex flex-col gap-4">
-              {messages.map((message, index) => (
-                <Card key={index} className="p-4">
-                  <strong>{message.role}:</strong> {message.content}
-                </Card>
-              ))}
-            </CardContent>
-          </>
-        ) : null}
-
-        {/* <TestComponent gfImg={""} messages={[]} /> */}
-
-        {loading && <p>Loading...</p>}
-        {error && <p>{error}</p>}
-      </Card>
-      <Card className="border-none items-center flex flex-row justify-center pb-4">
-        {!systemSettings && (
+      {!systemSettings && (
+        <>
+          <GfConfigForm />
           <Button
             onClick={async () => await initializeOpenAI()}
             disabled={loading}
-            className="min-w-[25vw] justify-center items-center "
+            className="min-w-[25vw] justify-center items-center mt-8"
           >
             Synthesize
           </Button>
-        )}
-        {systemSettings && !loading && (
-          <CardFooter className="flex flex-row gap-4 mt-4 max-w-[80vw]">
-            <Input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              disabled={loading}
-            />
-
-            <Button onClick={handleSendMessage} disabled={loading}>
-              Send
-            </Button>
-          </CardFooter>
-        )}
-      </Card>
-    </Card>
+        </>
+      )}
+    </>
   );
 };
 
