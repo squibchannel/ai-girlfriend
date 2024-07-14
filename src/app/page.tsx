@@ -1,14 +1,14 @@
 import AiBodyCardHeader from "@/components/AiBodyCardHeader";
-import GfConfigForm from "@/components/GfConfigForm";
 import AiBody from "@/components/gfv2/AiBody";
-import { Card } from "@/components/ui/card";
+import MainHero from "@/components/MainHero";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center">
-      <AiBodyCardHeader />
+    <main className="flex flex-col items-center text-center justify-center min-h-screen">
+      <MainHero />
+      {/* <AiBodyCardHeader /> */}
       {/* <GfConfigForm /> */}
-      <AiBody />
+      {/* <AiBody /> */}
     </main>
   );
 }

@@ -16,6 +16,8 @@ import {
 import Image from "next/image";
 import { testParamsForAlice, aliceConfigTestData } from "@/lib/const/testData";
 import TestComponent from "@/lib/const/TestComponent";
+import Pepe from "@/lib/const/Pepe";
+import MainHero from "../MainHero";
 
 const AiBody: React.FC = () => {
   const [systemSettings, setSystemSettings] = useState<Message | null>(null);
@@ -32,7 +34,6 @@ const AiBody: React.FC = () => {
 
   useEffect(() => {
     const whereIsMyGf = async () => {
-      console.log("looking for gf");
       try {
         const status = await checkForActiveGirlfriend();
         console.log(status);
@@ -128,10 +129,8 @@ const AiBody: React.FC = () => {
   };
 
   return (
-    <Card>
-      {/* <CardHeader className="border-none flex items-center justify-center w-full">
-        <Image src="/pepe.jpg" alt="pepe-img" height={512} width={512} />
-      </CardHeader> */}
+    <Card className="max-h-fit max-w-[90vw]">
+      {/* <Pepe /> */}
       {gfImg && (
         <Card className="border-none p-4 flex items-center justify-center w-full">
           <Image
@@ -143,7 +142,7 @@ const AiBody: React.FC = () => {
           />
         </Card>
       )}
-      <Card className="border-none flex flex-col p-4 mt-4 w-[90vw] mb-8 items-center max-h-[45vh] overflow-scroll">
+      <Card className="border-none flex flex-col p-4 mt-4 w-[90vw] mb-8 items-center max-h-[45vh] overflow-scroll overflow-x-hidden">
         {gfImg ? (
           <>
             <CardContent className="flex flex-col gap-4">
@@ -172,7 +171,7 @@ const AiBody: React.FC = () => {
           </Button>
         )}
         {systemSettings && !loading && (
-          <CardFooter className="flex flex-row gap-4 mt-4">
+          <CardFooter className="flex flex-row gap-4 mt-4 max-w-[80vw]">
             <Input
               type="text"
               value={input}
