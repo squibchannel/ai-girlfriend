@@ -19,6 +19,7 @@ import TestComponent from "@/lib/const/TestComponent";
 import Pepe from "@/lib/const/Pepe";
 import MainHero from "../MainHero";
 import GfConfigForm from "../GfConfigForm";
+import { Textarea } from "../ui/textarea";
 
 const AiBody: React.FC = () => {
   const [systemSettings, setSystemSettings] = useState<Message | null>(null);
@@ -132,7 +133,7 @@ const AiBody: React.FC = () => {
   return (
     <>
       {systemSettings && (
-        <Card className="max-h-fit max-w-[90vw]">
+        <Card className="border-none max-h-[90vh] max-w-[90vw] min-h-screen flex flex-col justify-center">
           {/* <Pepe /> */}
           {gfImg && (
             <Card className="border-none p-4 flex items-center justify-center w-full">
@@ -163,14 +164,15 @@ const AiBody: React.FC = () => {
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
           </Card>
-          <Card className="border-none items-center flex flex-row justify-center pb-4">
+          <Card className="border-none items-center flex flex-row justify-center pb-4 ">
             {systemSettings && !loading && (
-              <CardFooter className="flex flex-row gap-4 mt-4 max-w-[80vw]">
-                <Input
-                  type="text"
+              <CardFooter className="flex flex-row gap-4 mt-4 min-w-[50vw] max-w-[80vw]">
+                <Textarea
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   disabled={loading}
+                  maxLength={250}
+                  className="resize-none"
                 />
 
                 <Button onClick={handleSendMessage} disabled={loading}>
@@ -182,7 +184,7 @@ const AiBody: React.FC = () => {
         </Card>
       )}
       {!systemSettings && (
-        <>
+        <Card className="border-none p-4 flex flex-col items-center justify-center">
           <GfConfigForm />
           <Button
             onClick={async () => await initializeOpenAI()}
@@ -191,7 +193,7 @@ const AiBody: React.FC = () => {
           >
             Synthesize
           </Button>
-        </>
+        </Card>
       )}
     </>
   );

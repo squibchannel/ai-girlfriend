@@ -71,7 +71,7 @@ const GfConfigForm: React.FC = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="mt-4 grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6"
+        className="mt-12  grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 "
       >
         {/* Text and Image Models Section */}
         <Card className="space-y-4 p-4">

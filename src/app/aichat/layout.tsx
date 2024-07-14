@@ -7,8 +7,7 @@ interface Props {
 
 export default function ChatLayout({ children }: Props) {
   return (
-    <main>
-      <AiBodyCardHeader />
+    <main className="place-content-center flex flex-col items-center">
       {children}
     </main>
   );

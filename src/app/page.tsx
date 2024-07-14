@@ -4,9 +4,8 @@ import MainHero from "@/components/MainHero";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center text-center justify-center min-h-screen">
+    <main className="flex flex-col items-center text-center justify-center min-h-screen ">
       <MainHero />
-      {/* <AiBodyCardHeader /> */}
       {/* <GfConfigForm /> */}
       {/* <AiBody /> */}
     </main>
